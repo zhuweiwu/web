@@ -1,0 +1,50 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+  <head>
+    <title>form.html</title>
+    <meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+    <meta http-equiv="description" content="this is my page">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  </head>
+  <body>
+  </body>
+  <script language="JavaScript">
+	/*
+	 * json格式表示一个对象
+	 *   格式:{key1:
+	 *        [
+	 *          {key01:value01,key02:value02},
+	 *           {key01:value01,key02:value02}
+	 *        ],
+	 *        key2:
+	 *        [
+	 *          {key01:value01,key02:value02},
+	 *           {key01:value01,key02:value02}
+	 *        ]
+	 *       }
+	 * 
+	 */
+	var people={"program1":
+		        [
+		            {"firstname":"zhang11","lastname":"sanfeng11","email11":"keni1@com"},
+				    {"firstname":"zhang12","lastname":"sanfeng12","email12":"keni2@com"}
+			    ],
+				"program2":
+		        [
+		            {"firstname":"zhang21","lastname":"sanfeng21","email":"keni21@com"},
+				    {"firstname":"zhang22","lastname":"sanfeng22","email":"keni22@com"}
+			    ],
+				"program3":
+		        [
+		            {"firstname":"zhang31","lastname":"sanfeng31","email":"keni31@com"},
+				    {"firstname":"zhang32","lastname":"sanfeng32","email":"keni32@com"}
+			    ]
+			   }
+			 
+	alert(people.program3[0].lastname);
+	
+
+	
+	
+  </script>
+</html>
