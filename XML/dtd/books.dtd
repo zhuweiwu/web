@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!ENTITY info "information">
+<!ENTITY % base "title,author,price">
+<!ELEMENT books (book+)>
+<!ELEMENT book (%base;)>
+<!ELEMENT title (#PCDATA)>
+<!ELEMENT author (#PCDATA)>
+<!ELEMENT price (#PCDATA)>
+
+
+<!ATTLIST book 
+	id ID #REQUIRED
+	pId IDREF #IMPLIED
+	city CDATA #FIXED "CHICAGO"
+	lang (EN|CN|JP) "CN"
+>

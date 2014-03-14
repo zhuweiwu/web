@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE books SYSTEM "books.dtd">
+
+<books>
+	<book id="bcd" city="CHICAGO">
+		<title>JAVA</title>
+		<author>aa &info; bb</author>
+		<price></price>
+	</book>
+	<book id="abc" pId="bcd" lang="EN">
+		<title>JAVA</title>
+		<author></author>
+		<price></price>
+	</book>
+</books>

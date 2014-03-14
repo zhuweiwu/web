@@ -1,0 +1,122 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<script language="JavaScript" src="../js/jquery-1.4.2.js"></script>
+		<title>添加用户</title>
+	</head>
+	<body>
+		<center>
+			<br><br>
+			添加用户:<br><br>
+			姓名: <input type="text" name="name" id="name" />&nbsp;&nbsp;
+			email: <input type="text" name="email" id="email" />&nbsp;&nbsp;
+			电话: <input type="text" name="tel" id="tel" /><br><br>
+			<button id="addUser">提交</button>
+			<br><br>
+			<hr>
+			<br><br>
+			<table id="usertable" border="1" cellpadding="5" cellspacing=0>
+				<tbody>
+					<tr>
+						<th>姓名</th>
+						<th>email</th>
+						<th>电话</th>
+						<th>&nbsp;</th>
+					</tr>
+					<tr>
+						<td>Tom</td>
+						<td>tom@tom.com</td>
+						<td>5000</td>
+						<td><a href="deleteEmp?id=Tom">Delete</a></td>
+					</tr>
+					<tr>
+						<td>Jerry</td>
+						<td>jerry@sohu.com</td>
+						<td>8000</td>
+						<td><a href="deleteEmp?id=Jerry">Delete</a></td>
+					</tr>
+				</tbody>
+			</table>
+		</center>
+	</body>
+	<script language="JavaScript">
+	 $(window).load(function(){
+	    $("#addUser").click(function(){
+	   	    //获取文本框的值
+			/*
+			 * 	姓名: <input type="text" name="name" id="name" />&nbsp;&nbsp;
+				email: <input type="text" name="email" id="email" />&nbsp;&nbsp;
+				电话: <input type="text" name="tel" id="tel" /><br><br>
+			 */
+			 var nameValue=$("#name").val();
+			 var emailValue=$("#email").val();
+			 var telValue=$("#tel").val();
+			
+			/*
+			 * <tr>
+						<td>Tom</td>
+						<td>tom@tom.com</td>
+						<td>5000</td>
+						<td><a href="deleteEmp?id=Tom">Delete</a></td>
+					</tr>
+			 */
+			//创建td 
+             var $nameTd=$("<td></td>");
+			 $nameTd.text(nameValue);
+			 
+			 var $emailTd=$("<td></td>");
+			 $emailTd.text(emailValue);
+			 
+			 var $telTd=$("<td></td>");
+			 $telTd.text(telValue)
+			 
+			 var $aTd=$("<td></td>");
+			 var $a=$("<a></a>");
+			 $a.attr("href","deleteEmp?id="+nameValue);
+			 $a.text("Delete");
+			 $aTd.append($a);
+			 
+			 //创建tr
+             var $tr=$("<tr></tr>");			 
+			 $tr.append($nameTd);
+			 $tr.append($emailTd);
+			 $tr.append($telTd);
+			 $tr.append($aTd);
+             
+			 //增加tr到table上,不用考虑tbody
+			 $("#usertable").append($tr);
+		
+		     //删除:
+			 $a.click(function(){
+			 	return delTr($a);
+			 });
+	    });	
+	 });
+	 
+	 function delTr($a){
+			/*
+			 * <tr>
+				  <td>Tom</td>
+				  <td>tom@tom.com</td>
+				  <td>5000</td>
+				  <td><a href="deleteEmp?id=Tom">Delete</a></td>
+			  </tr>
+			 */
+		var name=$a.parent().parent().children().eq(0).text();
+		
+		//alert(name);
+		var flag=window.confirm("您真的要删除["+name+"这个用户吗]");
+		
+		//点击"取消"
+		if(!flag){
+			return false;
+		}
+		
+		//删除:
+		$a.parent().parent().remove();
+		
+		return false;
+	 }
+	</script>
+</html>

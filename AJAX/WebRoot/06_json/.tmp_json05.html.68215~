@@ -1,0 +1,27 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+  <head>
+    <title>form.html</title>
+    <meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+    <meta http-equiv="description" content="this is my page">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  </head>
+  <body>
+  </body>
+  <script language="JavaScript">
+	var people={
+	   "username":"zhang",
+	   "sex":"male",
+	   "tel":{"phone":"110","cell":"13812345678"},
+	   "address":[
+	               {"city":"tieling","postcode":"110"},
+				   {"city":"beijing","postcode":"100"}
+				 ]	
+	}
+	
+	alert(people.username);
+	alert(people.tel.cell);
+	alert(people.address[1].city);
+
+  </script>
+</html>

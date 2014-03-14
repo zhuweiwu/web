@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<exam>
+	<student>
+		<id>333</id>
+		<name>Tom</name>
+		<location>New York</location>
+		<grade>90</grade>
+	</student>	
+	
+	<student>
+		<id>444</id>
+		<name>Kate</name>
+		<location>New York</location>
+		<grade>90</grade>
+	</student>
+</exam>

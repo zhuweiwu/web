@@ -1,0 +1,86 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+  <head>
+    <title>form.html</title>
+    <meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+    <meta http-equiv="description" content="this is my page">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  </head>
+  <body>
+  	  <select id="province" name="province">
+       <option value="">请选择....</option>
+     </select>
+	 <select id="city" name="city">
+	 	<option value="">请选择.....</option>
+	 </select>
+  </body>
+  <script language="JavaScript">
+  		window.onload = function(){
+			var xhr = ajaxFunction();
+			
+			xhr.onreadystatechange = function(){
+				if(xhr.readyState==4){
+					if(xhr.status==200){
+						var data = xhr.responseText;
+						
+						//alert(data);
+						/*
+						 * 利用eval()函数转换成json数据格式，传入eval()函数的内容还是文本内容
+						 * 		* 利用eval()函数进行转换json数据格式，需要利用"()"将传入的参数进行包裹
+						 * 			* 如果不利用"()"进行包裹，传入的内容是"{}"，这时eval()函数会将其识别成"空的语句块"
+						 * 			* 如果利用"()"进行包裹，传入的内容是"{}"，这时eval()函数会强行将其转换成json格式
+						 * 
+						 * 		* 加上"()"一定转换成功
+						 */
+						var json = eval("("+data+")");
+						//alert(json[0].province);
+						
+						for(var i=0;i<json.length;i++){
+							var provinceValue = json[i].province;
+							
+							/*
+							 * <select id="province" name="province">
+							       <option value="">请选择....</option>
+							     </select>
+							 */
+							var optionElement = document.createElement("option");
+							optionElement.setAttribute("value",provinceValue);
+							var provinceText = document.createTextNode(provinceValue);
+							optionElement.appendChild(provinceText);
+							
+							var provinceElement = document.getElementById("province");
+							provinceElement.appendChild(optionElement);
+							
+							
+						}
+					}
+				}
+			}
+			
+			xhr.open("post","../servlet/JsonServlet?timeStamp="+new Date().getTime(),true);
+			
+			xhr.send(null);
+		}
+		
+		function ajaxFunction(){
+		   var xmlHttp;
+		   try{ // Firefox, Opera 8.0+, Safari
+		        xmlHttp=new XMLHttpRequest();
+		    }
+		    catch (e){
+			   try{// Internet Explorer
+			         xmlHttp=new ActiveXObject("Msxml2.XMLHTTP");
+			      }
+			    catch (e){
+			      try{
+			         xmlHttp=new ActiveXObject("Microsoft.XMLHTTP");
+			      }
+			      catch (e){}
+			      }
+		    }
+		
+			return xmlHttp;
+		 }
+  
+  </script>
+</html>
