@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xmlns:context="http://www.springframework.org/schema/context"
+		xmlns:tx="http://www.springframework.org/schema/tx"
+		xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+				http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-2.5.xsd
+				http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.5.xsd">
+	
+	<!-- aop需要配置的: 1.被代理的对象 2.前置通知 3.代理对象 -->
+	<!-- 配置代理对象 -->
+	<bean id="testServiceImpl1" class="com.aop.TestServiceImpl1">
+		<property name="name" value="zhuwei" />
+	</bean>	
+	<!-- 配置前置通知 -->
+	<bean id="myMethodBeforeAdvice" class="com.aop.MyMethodBeforeAdvice" />
+	<!-- 配置后置通知 -->
+	<bean id="myAfterReturningAdvice" class="com.aop.MyAfterReturningAdvice" />
+	<!-- 配置环绕通知 -->
+	<bean id="myMethodIntercepter" class="com.aop.MyMethodIntercepter" />
+	<!-- 配置异常通知 -->
+	<bean id="myThrowsAdvice" class="com.aop.MyThrowsAdvice" />
+	
+	
+	<!-- 配置代理对象 -->
+	<bean id="proxyFactoryBean" class="org.springframework.aop.framework.ProxyFactoryBean">
+		<!-- 代理的接口集 -->
+		<property name="proxyInterfaces">
+			<list>
+				<value>com.aop.TestService</value>
+				<value>com.aop.TestService2</value>
+			</list>
+		</property>
+		<!-- 通知织入到代理对象 -->
+		<property name="interceptorNames">
+			<list>
+				<!-- 织入前置通知 -->
+				<value>myMethodBeforeAdvice</value>
+				<!-- 织入后置通知 -->
+				<value>myAfterReturningAdvice</value>
+				<!-- 织入环绕通知 -->
+				<value>myMethodIntercepter</value>
+				<!-- 织入异常通知 -->
+				<value>myThrowsAdvice</value>
+			</list>
+		</property>
+		<!-- 配置被代理对象 -->	
+		<property name="target">
+			<ref bean="testServiceImpl1"/>
+		</property>
+	</bean>
+</beans>

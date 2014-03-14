@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+		PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+			"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 要保证namespace的唯一性，可以用包名加具体的类名来称呼 -->
+<mapper namespace="com.domain2.Order">
+	<resultMap type="com.domain2.Order" id="orderMap">
+		<id column="id" property="id"/>
+		<result column="number" property="number"/>
+		<result column="price" property="price"/>
+		
+		<!-- 多对一的关系的维护 -->
+		<association property="person" javaType="com.domain2.Person">
+			<id column="id" property="id"/>
+			<result column="name" property="name"/>
+			<result column="address" property="address"/>
+			<result column="tel" property="tel"/>
+		</association>
+	</resultMap>
+	
+	<!-- 根据id查询订单，将person关联出来 -->
+	<select id="selectOrderById" parameterType="string" resultMap="orderMap">
+		select p.*, o.* from person p, orders o where p.id=o.pid and o.id=#{id}
+	</select>
+	
+</mapper>

@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+		PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+			"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 要保证namespace的唯一性，可以用包名加具体的类名来称呼 -->
+<mapper namespace="com.domain.User">
+	<!-- 这种方法用的比较多  -->
+	<resultMap type="com.domain.User" id="userMap">
+		<id column="id" property="id"/>
+		<result column="name" property="username"/>
+		<result column="address" property="address"/>
+	</resultMap>
+	
+	<select id="selelctUserUseReslutMap" parameterType="string" resultMap="userMap">
+		select * from user where id=#{id}
+	</select>
+
+
+
+	<!-- id:当前语句的唯一标示 parameterType:参数类型 resultType：结果类型 -->
+	<select id="selectUserById" parameterType="string" resultType="com.domain.User">
+		<!-- select * from user where id = #id# 老版iBatis用法-->
+		select id, name as username, address from user where id = #{id}
+	</select>
+	
+	<select id="selectAllUser" resultType="com.domain.User">
+		select id, name as username, address from user
+	</select>
+	<!-- 根据id查User，返回值为Map -->
+	<select id="selectUserByIdReturnMap" parameterType="string" resultType="hashmap">
+		select id, name as username, address from user where id = #{id}
+	</select>
+		
+	<!-- 动态sql，根据条件查 写法1 -->
+	<select id="selectUserByCondition1" parameterType="com.domain.User" resultType="com.domain.User">
+		select id, name as username, address from user where 1=1
+		<if test="id != null">
+			and id=#{id}
+		</if>
+		<!-- username is a property of the user entity -->
+		<if test="username != null">
+			and name = #{username}
+		</if>
+		<if test="address != null">
+			and address = #{address}
+		</if>
+	</select>
+	
+	<!-- 动态sql，根据条件查 写法2 -->
+	<select id="selectUserByCondition2" parameterType="com.domain.User" resultType="com.domain.User">
+		select id, name as username, address from user 
+		<where>
+			<if test="id != null">
+				id=#{id}
+			</if>
+			<!-- username is a property of the user entity -->
+			<if test="username != null">
+				and name = #{username}
+			</if>
+			<if test="address != null">
+				and address = #{address}
+			</if>		
+		</where>		
+	</select>
+	
+	<insert id="insertUser" parameterType="com.domain.User">
+		insert into user(id,name,address) values(#{id},#{username},#{address})
+	</insert>
+	
+	<delete id="deleteUserById" parameterType="string">
+		delete from user where id = #{id}
+	</delete>
+	
+	<update id="updateUserById" parameterType="com.domain.User">
+		update user set name=#{username}, address=#{address} where id=#{id}
+	</update>
+</mapper>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xmlns:context="http://www.springframework.org/schema/context"
+		xmlns:tx="http://www.springframework.org/schema/tx"
+		xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+				http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-2.5.xsd
+				http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.5.xsd">
+	<!-- bean元素的作用是： 当我们的spring框架加载的时候， spring就会自动创建一个bean对象，并放入内存中 
+		下面这个bean就相当于：
+			UserService userService = new UserService();
+			userService.setName("zhuwei");			
+	-->
+	<bean id="userService" class="com.service.UserService">
+	<!-- 这里体现出注入的概念  -->
+		<property name="name">
+			<value>zhuwei</value>
+		</property>
+		<property name="byeService" ref="byeService"></property>
+		
+	</bean>
+	
+	<bean id="byeService" class="com.service.ByeService">
+		<property name="name" value="zhuwei" />
+	</bean>
+
+	
+				
+</beans>

@@ -1,0 +1,41 @@
+<!DOCTYPE hibernate-configuration PUBLIC
+	"-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+
+<hibernate-configuration>
+
+	<session-factory>
+	
+		<property name="hibernate.connection.provider_class">org.hibernate.connection.C3P0ConnectionProvider</property>
+		<property name="hibernate.c3p0.max_size">50</property>
+		<property name="hibernate.c3p0.min_size">10</property>
+		<property name="hibernate.c3p0.timeout">5000</property>
+		<property name="hibernate.c3p0.max_statements">100</property>
+		<property name="hibernate.c3p0.acquire_increment">2</property>
+		<property name="hibernate.c3p0.validate">false</property>
+	
+	
+		<property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
+		<property name="hibernate.connection.url">jdbc:mysql://localhost:9999/oa</property>
+		<property name="hibernate.connection.username">root</property>
+		<property name="hibernate.connection.password">1234</property>
+		<!-- 告诉hibernate你用的是什么数据库  -->
+		<property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property> 
+	 	
+		<!--
+		#hibernate.hbm2ddl.auto create-drop 测试的时候可以用，程序开始创建，程序完成删除
+		#hibernate.hbm2ddl.auto create
+		#hibernate.hbm2ddl.auto update
+		#hibernate.hbm2ddl.auto validate 校验表， 安全
+		-->
+		<property name="hibernate.hbm2ddl.auto">update</property><!--告诉hibernate是否需要创建表之类的设置  -->
+		
+		<property name="show_sql">true</property><!--看hibernate的sql语句  -->
+		<property name="hibernate.cache.use_query_cache">true</property> <!-- 设置query也能放到缓存中 -->
+		<property name="hibernate.cache.use_second_level_cache">true</property>
+		<property name="hibernate.cache.provider_class">org.hibernate.cache.OSCacheProvider</property>
+		<property name="hibernate.generate_statistics">true</property>
+		
+		<mapping resource="com/zhuwei/dao/User.hbm.xml"/>
+	</session-factory>
+</hibernate-configuration>

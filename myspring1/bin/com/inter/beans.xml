@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xmlns:context="http://www.springframework.org/schema/context"
+		xmlns:tx="http://www.springframework.org/schema/tx"
+		xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+				http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-2.5.xsd
+				http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.5.xsd">
+	<bean id="changeCharacters" class="com.inter.UpperCharacters">
+		<property name="str">
+			<value>abcdefg</value>
+		</property>
+	</bean>
+	<!-- 
+	<bean id="changeCharacters" class="com.inter.LowerCharacters">
+		<property name="str">
+			<value>DDDDDDDD</value>
+		</property>
+	</bean>			
+	 -->
+				
+</beans>
